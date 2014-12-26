@@ -1,0 +1,401 @@
+Document Name	PDN 2.0 Specification
+Web Location	www.nemesis.info/pdn2.txt
+Author 			Murray Cash
+VERSION 		0.1 DRAFT
+Date			19-Oct-2003
+
+Version History
+
+0.1 19-Oct-2003	First Draft based on emails and BBS activity circa 
+Nov-2002.
+
+
+1. INTRODUCTION
+
+PDN (Portable draughts notation) is a text document format used to 
+store the details of games of checkers/draughts. Here we are 
+concerned only with American 8x8 checkers, or English Draughts, 
+although this could be considered a subset of the PGN (Portable Games 
+Notation) format [1] and the PDN format used in other forms of 
+checkers, e.g. 10x10.
+
+This document outlines the document definition and attempts to 
+resolve any ambiguities left over from the loosely defined PDN 1.0 
+format.
+
+2. INTENDED AUDIENCE
+
+This document is primarily aimed at checkers programmmers, but may be 
+of interest to checker players also.
+
+3. ASPIRATIONS
+
+If programmers follow the guidelines in this document all our 
+programs and databases can understand each other's PDN documents 
+without the need for document conversion, creating a more convenient 
+situation for programmers and users.
+
+4. INPUT AND OUTPUT FORMATS
+
+PDN has 2 formats, Input and Output. The Input format defines the 
+rules that a program must follow to read in a PDN file. The Output 
+format defunes the rules a program must follow to write (create) a 
+PDN file.
+
+Programs that need to read PDN should adhere to the PDN Input format. 
+Programs that need to write PDN should adhere to the PDN output 
+format. A single program can adhere to both formats.
+
+The output format is more rigerous than the input format, and 
+programs are free to create their own extensions to the input format 
+to cope with older and less compatible PDN documents.
+
+The convention [Input] is used to signify the PDN Input format, and 
+[Output] for the Output format.
+
+5. GENERAL FILE FORMAT
+
+5.1 ISO-8859-1
+
+PDN [Input][Output] should adhere to the ISO-8859-1 (ISO Latin 1) 
+file format [2][3], supporting 8-bit Latin characters including 
+common European accents.
+
+5.2 END OF LINE FORMAT AND 80 CHARACTER DOCUMENT WIDTH
+
+[Input] supports any of the text file formats, therefore an end of 
+line marker could be recognised as <CR><LF> or <CR> only.
+
+[Output] conforms to the PC Standard <CR><LF> as at the time of 
+writing, all programs manipulating PDN are on this platform.
+
+[Output] The standard is to ensure all lines are 80 readable 
+characters or less in width. This ensures humans can easily read PDN 
+using text editors.
+
+
+6. OVERALL DOCUMENT STRUCTURE
+
+6.1 TOP LEVEL
+
+[GAME...]
+
+6.1.1 GAME DEFINITION
+
+[GAME_HEADER]
+[GAME_BODY]
+
+6.1.1.1 GAME_HEADER DEFINITION
+
+[HEADER...]
+
+6.1.1.1.1 HEADER DEFINITION
+
+All of the following are optional and the sequence is unimportant, 
+but within a single [HEADER], each can appear a maximum of one time 
+only.
+
+[Event [EVENT_TEXT]][WHITESPACE]
+[Date [DATE_TEXT]][WHITESPACE]
+[Black [BLACK_PLAYER_TEXT]][WHITESPACE]
+[White [WHITE_PLAYER_TEXT]][WHITESPACE]
+[Site [SITE_TEXT]][WHITESPACE]
+[Result [RESULT_TEXT]][WHITESPACE]
+[Round [ROUND_TEXT]][WHITESPACE]
+[FEN [FEN_TEXT]][WHITESPACE]
+[ANNOTATION][WHITESPACE]
+
+The text from any of these headers must NOT include the following 
+characters: 
+
+" (double quote)
+[ (open square bracket)
+] (close square bracket)
+
+
+6.1.1.1.1.1 EVENT_TEXT DEFINITION (Optional)
+
+A Textual description of the event surrounding the game enclosed in 
+double quotes (").
+
+6.1.1.1.1.2 DATE_TEXT DEFINITION (Optional)
+
+The date of the game enclosed in double quotes ("). The format is as 
+follows: YYYY-MM-DD. E.g. 2003-10-19, indicating 19th October 2003.
+
+If any components of the date are unknown, replace by `??' 
+characters. Use the same number of "?" characters as would would have 
+been used with a real date number.
+
+The Date format is fixed-width, so ensure leading zeros where 
+applicable. E.g. 2003-01-?? Indicating January 2003.
+
+6.1.1.1.1.3 BLACK_PLAYER_TEXT, WHITE_PLAYER_TEXT DEFINITIONS 
+(Optional)
+
+The Textual name of the player who played that colour (Black is 
+equivalent to Red) enclosed in double quotes. 
+
+Although this element is free-text, it has become standard practice 
+within PGN to format the names this way:
+
+[FAMILY_NAME][,][ ][[INITIAL][.]...]
+or 
+[FAMILY_NAME][,][ ][FIRST NAME]
+
+E.g. 
+[Black "Tinsley, M.F."]
+[White "King, R.]
+[Black "Moiseyev, Alex]
+
+Following this convention allows database programs to make more 
+powerful search options available as they can make correct decisions 
+about grouping together games by the same players.
+
+6.1.1.1.1.5 SITE_TEXT DEFINITION (Optional)
+
+A Textual description of the site (location) of the game enclosed in 
+double quotes ("). Internet games are usually referred to as 
+"Internet". 
+
+This is free-format but the convention within PGN is usually to 
+comma-separate the Building, City, State/County and Country, e.g. 
+"ICHF, Petal, MS, USA".
+
+6.1.1.1.1.5 RESULT_TEXT DEFINITION (Optional)
+
+A Textual description of the result of the game enclosed in double 
+quotes (").
+
+This must be one of the following:
+
+(a) [Result "1-0"] indicating Black (Red) won the game
+(b) [Result "0-1"] indicating White won the game
+(c) [Result "1/2-1/2"] indicating the game was a draw
+(d) [Result "*"] indicating the game was unfinished, or the result 
+unknown.
+
+Note that the result code is also defined at the end of the 
+[GAME_BODY] definition (see 6.1.1.2.6 TERMINATOR DEFINITION). If the 
+result code is used here, it must match the result code used in that 
+element.
+
+6.1.1.1.1.6 ROUND_TEXT DEFINITION (Optional)
+
+A Textual description of the round of the game enclosed in double 
+quotes ("). 
+
+In a one-to-one match, the Round is the same as the game number 
+within the match.
+
+In tournaments where multiple games are played within a round, e.g. 
+the U.S. National Tournament where 4 games are normally played within 
+a round, the convention is to use <Round>.<Game>, e.g. [Round "10.3"] 
+indicates Round 10, game 3.
+
+6.1.1.1.1.7 FEN_TEXT DEFINITION (Optional)
+
+A description of the set up position of the board enclosed in double 
+quotes ("). This header is only used when the game does not begin 
+from the usual starting position. Typically the game is a 
+continuation of a problem, or an 11-man ballot game.
+
+The format of the quoted description is as follows: 
+
+[TURN]:[COLOUR1][[K][SQUARE_NUM][,]...]:[COLOUR2][[K][SQUARE_NUM][,].
+..]
+
+[TURN] is B or W defining whose turn it is to play first (B = 
+Black/Red, W = White).
+
+[COLOUR1] and [COLOUR2] are either B or W defining the colour of the 
+pieces on the squares to follow. One must be B; the other W. The 
+sequence is unimportant.
+
+[K] is optional before each SQUARE_NUM and if used, indicates the 
+piece on that square is a king, otherwise it is a man.
+
+[SQUARE_NUM] indicates the square number that is occupied by a 
+certain piece. This is in the range 1-32 according to checkers 
+standards. These are comma-separated, and their sequence is 
+unimportant.
+
+Examples:
+
+[FEN "B:W18,24,27,28,K10,K15:B12,16,20,K22,K25,K29"] 
+
+[FEN "B:W18,19,21,23,24,26,29,30,31,32:B1,2,3,4,6,7,9,10,11,12"]
+
+6.1.1.1.1.8 ANNOTATION DEFINITION (Optional)
+
+A Textual Annotation may be entered here, enclosed within curly 
+brackets {}, e.g. {King was down 2 games as we entered the last day 
+of play}. Annotations can also heppen between moves, refer to 
+6.1.1.2.4, e.g. {Moiseyev usually plays 25-22 here but this seems 
+like a new cook}.
+
+6.1.1.1.1.9 WHITESPACE DEFINITION (Optional)
+
+[WHITESPACE] = [[SPACE]|[TAB]|[CR]|[LF]|[CR}[LF]...]
+
+Any combination of [CR] (ASCII 13d) [LF] (ASCII 10d), Tab or Space 
+characters in any sequence.
+
+
+6.1.1.2 GAME_BODY DEFINITION (Mandatory)
+
+The sequence of the following is fixed, apart from [ANNOTATION] and 
+[VARIATION], which may be interchanged.
+
+[
+[MOVE_SEQUENCE]		(Optional)
+[MOVE]			(Mandatory)
+[STRENGTH]			(Optional)
+[WHITESPACE]		(Optional)
+[ANNOTATION][WHITESPACE](Optional)
+[VARIATION][WHITESPACE]	(Optional)
+...]
+[WHITESPACE]		(Optional)
+[TERMINATOR]		(Mandatory)
+[WHITESPACE]		(Optional)
+
+6.1.1.2.1. MOVE_SEQUENCE DEFINITION (Optional)
+
+[MOVE_SEQ].[WHITESPACE]
+
+[MOVE_SEQ] = Integer >= 1
+
+A move sequence number can delimit each move or pair of moves within 
+a game. However, if move sequencing is used within a game, its usage 
+must be consistent within that game, i.e. all single moves are 
+sequence, or all move pairs, but not a mixture, or some moves are 
+sequenced and not others.
+
+This is the number of the move (or pair of moves) followed by a full 
+stop (period) and lastly any number of whitespace. 
+
+The first move sequence number should be 1, and it should increment 
+by 1 for each new number.
+
+6.1.1.2.2 MOVE DEFINITION (Mandatory)
+
+[[SQ][[DELIMITER][SQ]...]] 
+
+[SQ] = square number using standard checkers notation. 
+
+[Input] [SQ] can include a leading zero for single-figure square 
+numbers.
+[Output] [SQ] does not include any leading zeros.
+
+The sequence starts with the starting square of the piece to move, 
+and continues through all the squares that the piece moves until it 
+reaches its final destination.
+
+[DELIMITER] is either a hyphen character (-), or optionally, for a 
+capturing move only, an upper or lower case "x" character.
+
+SIMPLIFIED JUMP FORMAT: 
+When the start-to-finish move sequence is not ambiguous, (i.e. there 
+exists at most 1 legal move with that start and finishing squares), 
+the move definition can be simplified to the following:
+
+[[SQ_START][DELIMITER][SQ_FINISH]] 
+
+[SQ_START] is the start square and [SQ_FINISH] is the finish square.
+
+Examples
+
+a) Walk Move example
+9-13 
+
+b) Single jump example
+26x17 
+
+c) Full Multiple jump example
+
+26x17x10
+
+d) Simplified jump example
+
+26x10 
+
+
+6.1.1.2.3 STRENGTH DEFINITION (Optional)
+
+Can be any of the following:
+
+*		"Star" move (considered the only move to win or to draw)
+!		Strong or noteable move
+?		Weak or questionable move
+
+6.1.1.2.4 ANNOTATION DEFINITION (Optional)
+
+Please refer to 6.1.1.1.1.7 ANNOTATION DEFINITION.
+Note that the sequence of [ANNOTATION] here can be interchanged with 
+[VARIATION].
+
+6.1.1.2.5 VARIATION DEFINITION (Optional)
+
+Note that the sequence of [VARIATION] here can be interchanged with 
+[ANNOTATION].
+
+A Variation is another [GAME_BODY], enclosed within parenthesis (). 
+
+The purpose of a [VARIATION] is to annotate alternative lines of play 
+into the PDN that were not part of the main game. Note that 
+[VARIATION] elements can be nested up to any level.
+
+A [VARIATION] differs from a [GAME_BODY] in the following ways:
+
+(a) [VARIATION] does not have its own [TERMINATOR] as the closure of 
+parenthesis is sufficient to terminate the variation.
+
+(b) The first move in a [VARIATION] is an alternative to the last 
+move in the "parent" [GAME_BODY], so the game position before the 
+variation starts is the same as the position before the last move in 
+the parent [GAME_BODY]. Normally a [GAME_BODY] starts in the standard 
+checkers starting position, or the [FEN] position.
+
+(c) Note: If [MOVE_SEQUENCE] was used within some higher level 
+[GAME_BODY} elements, it is still optional to use [MOVE_SEQUENCE] 
+within the [VARIATION], though if used, the usage should be 
+consistent with the higher levels.
+
+6.1.1.2.6 TERMINATOR DEFINITION (Mandatory)
+
+The purpose of the [TERMINATOR] is twofold: Firstly it terminates a 
+single game within a PDN document, and secondly it indicates the 
+result of that game.
+ 
+This must be one of the following:
+
+(a) 1-0 		indicating Black (Red) won the game
+(b) 0-1		indicating White won the game
+(c) 1/2-1/2	indicating the game was a draw
+(d) *		Indicating the game was unfinished, or the result 
+unknown.
+
+Note that if the [RESULT_TEXT] is defined in the PDN Header, the 
+result there must match the one defined here.
+
+7. ALTERNATIVE DOCUMENT DEFINITIONS
+
+An XML schema defining an alternative way of storing checkers games 
+in extensible XML format is available. See reference [4].
+
+REFERENCES
+
+[1] PGN Spec, 
+http://www.geocities.com/CapeCanaveral/Launchpad/2640/pgn/pgn_spec/pg
+n_spec.htm
+
+[2] ISO 8859-1 definition, from ISO web site 
+http://www.iso.org/iso/en/CatalogueDetailPage.CatalogueDetail?CSNUMBE
+R=28245&ICS1=35&ICS2=40&ICS3=
+
+[3] ISO 8859-1 Character List, 
+http://www.utoronto.ca/webdocs/HTMLdocs/NewHTML/iso_table.html
+
+[4] Nemesis XSD definition
+http://www.nemesis.info/nemesis.xsd
+

@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+
+"""Capers - play at draughts
+
+This is just a small launcher, the classes themselves are imported
+from the capers module.
+
+"""
+
+import pygtk
+pygtk.require('2.0')
+import gtk.glade
+
+import sys
+import os
+appdir = sys.path[0]
+sys.path.insert(1, os.path.join(appdir, 'share'))
+#print >> sys.stderr, sys.path[0]
+import capers
+
+#import signal
+#signal.signal (signal.SIGINT, signal.SIG_DFL)
+
+if __name__ == '__main__':
+	main = capers.Main()

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Capers
+GenericName=Checkers Game
+GenericName[de]=Damespiel
+Comment=Play at droughts
+Comment[de]=Dame spielen
+Exec=/opt/capers/bin/capers
+Icon=/opt/capers/share/capers.png
+Categories=Game

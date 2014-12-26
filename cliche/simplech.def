@@ -1,0 +1,3 @@
+EXPORTS	getmove
+	islegal
+	enginecommand

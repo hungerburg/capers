@@ -1,0 +1,17 @@
+cliche (1.2) unstable; urgency=low
+
+  * some compiler warnings suppressed
+
+ -- Peter Chiochetti <pch12@myzel.net>  Wed, 24 Dec 2014 20:18:31 +0100
+
+cliche (1.1-1) unstable; urgency=low
+
+  * WIN32 port.
+
+ -- Peter Chiochetti <pch12@myzel.net>  Sun, 28 Mar 2004 20:50:00 +0100
+
+cliche (1.0-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Peter Chiochetti <pch12@myzel.net>  Mon, 24 Nov 2003 14:34:34 +0100

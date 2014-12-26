@@ -1,0 +1,28 @@
+capers (0.95-1) unstable; urgency=low
+
+  * cope with from-to multiple jumps like cake sends
+
+  -- Peter Chiochetti <pch12@myzel.net> Wed Apr 20 14:12:27 2005 +0200
+
+capers (0.94-1) unstable; urgency=low
+
+  * when result ready, print last move to status line
+
+  -- Peter Chiochetti <pch12@myzel.net> Sam Feb  5 14:42:08 2005 +0100
+
+capers (0.93-1) unstable; urgency=low
+
+  * more robust: dragging a piece now sets board to busy too
+  * packaged as a rox AppDir
+
+  -- Peter Chiochetti <pch12@myzel.net> Fri Feb  4 2005 01:35:04 +0100
+
+capers (0.92-1) unstable; urgency=high
+
+  * play games: human/human, human/engine, engine/engine
+  * read/write pdn: save games, browse games played in
+    this session or loaded from file, copy/paste games
+  * initial release: freshmeat announce
+
+  -- Peter Chiochetti <pch12@myzel.net> Mon Jan 24 2005 19:38:00 +0100
+

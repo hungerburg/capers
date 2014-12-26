@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Capers - play at draughts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css"><!--
+body { font-size:14pt; margin:3em; width:48em; background-color:#ffffee; margin:0 auto; }
+h1 { font-size:18pt; padding-top:3ex; }
+h2 { font-size:14pt; }
+dt { font-weight:roman; }
+dd { margin:0ex 2em; }
+img { border-style:none; border-width:0px; }
+.marginal { width:14em; float:right; padding:0 0 5ex 7em; margin-right:-7em; clear:both; }
+.marginal * { font-size:12pt }
+--></style>
+</head>
+<body>
+
+<p class="marginal"><em>He capers, he dances, he has eyes of youth.</em>
+<span>--Shakespeare / The Merry Wives of Windsor</span></p>
+
+<h1>Capers!</h1>
+
+<p>Play checkers against the computer and<br>study draughts games from books.</p>
+
+<p class="marginal"><em>I will, therefore, take occasion to assert that the
+higher powers of the reflective intellect are more decidedly and more usefully
+tasked by the unostentatious game of draughts than by all the elaborate
+frivolity of Chess.</em> <span>--Poe / The Murders in the Rue
+Morgue.</span></p>
+
+<img src="screenshot.png" width="514" height="318" alt="[screenshot]" />
+
+<p>Its really more an office application than a game: a game would let the user
+enter a small café, and with the aid of a waiter, sit down at some table, join
+a game, have a chat, get up, and settle on another table, to play another
+opponent.</p>
+
+<p>Still, capers tries its best, to give you a pleasant time with <em>Martin
+Fierz'</em> strong checkers engines that search a given board for the 'best'
+move.
+Most commands are in the buttons, yet there are some more and powerful ones
+hidden in the context-menu (right-mouse-click).</p>
+
+
+<p>Capers is free software: you are invited to share and tinker. if in doubt,
+see accompanying file COPYING for details on distribution and derivation.</p>
+
+
+<h1>System requirements</h1>
+
+<p>Capers depends on python and gtk, and pygtk, which glues
+them together, version <em>2.4 of pygtk</em> at least;
+also, it needs gnome canvas to display the board, and
+python-ctypes, to talk to the engines.</p>
+
+<p>It should work in most linux distributions, provided the
+dependencies are met and sufficiently recent. It might also
+work in Windows, if you manage to collect all the above
+packages.</p>
+
+
+<h1>Related</h1>
+
+<p>You may want to visit Martin Fierz' checkers page
+<a href="http://www.fierz.ch/checkers.htm">
+http://www.fierz.ch/checkers.htm</a>.</p>
+
+
+<h1>Screenshots</h1>
+
+<p><img src="screenshot2.png" alt="[screenshot showing middle
+of some game from a pdn book]" /></p>
+
+<p><img src="screenshot1.png" alt="[screenshot showing middle of
+some game and new game with options dialogue]" /></p>
+
+
+<h1>Disclaimer</h1>
+
+<ul>
+<li>A game, for which there is no engine, cannot be played, as
+capers does not know how to take pieces and crown kings - not
+even for the English rules (that's different from Martin Fierz'
+CheckerBoard).</li>
+
+<li>Unlike earlier versions of capers, this one is made
+with a toolkit. the python bindings make working with gtk
+quite bearable. documentation is, except in parts, very clear
+and accurate.</li>
+
+<li>This follows the object oriented design. still, there are
+just procedures. they are organised in classes, to not have to
+come up with clever names for functions and globals, and to
+more easily build on the fine work others have done.</li>
+
+<li>No care has been taken to make the objects reusable
+outside of this context. they all depend one on the other;
+though most of the work gets done in the "game" class.</li>
+</ul>
+
+<p>This page is
+<a href="http://arton.cunst.net/capers/index.html">
+http://arton.cunst.net/capers/index.html</a>.</p>
+
+<p>Send suggestions, bug reports and bug fixes to <a href="http://arton.cunst.net/mail.html">pch(a)myzel.net</a></p>
+
+</body></html>

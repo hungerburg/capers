@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<AppInfo>
+  <Summary xml:lang="en">A checkers board and game</Summary>
+  <Summary xml:lang="de">Ein Damebrett und -spiel</Summary>
+  <About xml:lang="en">
+    <Purpose>Play at draughts</Purpose>
+    <Version>beta 4</Version>
+    <Authors>Peter Chiochetti</Authors>
+    <License>GNU General Public License</License>
+    <Homepage>http://arton.cunst.net/capers/</Homepage>
+  </About>
+  <About xml:lang="de">
+    <Purpose>Dame spielen</Purpose>
+  </About>
+</AppInfo>

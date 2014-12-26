@@ -1,0 +1,20 @@
+Source: capers
+Section: main/games
+Priority: optional
+Maintainer: Peter Chiochetti <pch12@myzel.net>
+Build-Depends: debhelper (>= 4.0.0)
+Standards-Version: 3.6.0
+
+Package: capers
+Architecture: any
+Depends: python-gnome2,python-glade2
+Description: Graphical Checkerboard
+ .
+ Capers provides a visual interface to so-called checkers
+ engines, that search a given board for the 'best' move.
+ Use it to play against the computer and to study draughts
+ games from pdn files.
+ Capers doesnt itself know how to play, but instead loads shared
+ objects, that search a given board for valid/good moves;
+ These modules have to conform to the API of Martin Fierz'
+ CheckerBoard application.
